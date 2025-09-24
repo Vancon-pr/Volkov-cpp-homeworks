@@ -3,10 +3,9 @@
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     std::string userName;
-    std::cout << "Введите свое имя\n"; 
-    getline(std::cin, userName);    // получаем от пользователя строку с именем
+    std::cout << "Enter yuor name\n"; 
+    getline(std::cin, userName);
     std::cout << "Hellow, " << userName << "\n";
     return 0;
 }
