@@ -7,19 +7,17 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	float a;
-	
 	try
 	{
 		cout << "Введите число: ";
 		cin >> a;
-		if (a) 
+		if (a)
 		{
-			
 			cout << "Квадрат: " << pow(a, 2) << "\n" << "Куб: " << pow(a, 3) << "\n";
 		}
 		else
 		{
-			throw "Необхлдимо ввести число\n";
+			throw "Необходимо ввести число\n";
 		}
 	}
 	catch (const char* error_messange)

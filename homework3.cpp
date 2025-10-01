@@ -19,7 +19,7 @@ int main()
 		}
 		else
 		{
-		throw "Необхлдимо ввести число\n";
+		throw "Необходимо ввести число\n";
 		}
 	}
 	catch (const char* error_messange)
