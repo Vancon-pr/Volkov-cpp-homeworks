@@ -16,8 +16,10 @@ int main()
 			
 			cout << "Квадрат: " << pow(a, 2) << "\n" << "Куб: " << pow(a, 3) << "\n";
 		}
-		throw "Необхлдимо ввести число\n";
-		
+		else
+		{
+			throw "Необхлдимо ввести число\n";
+		}
 	}
 	catch (const char* error_messange)
 	{
