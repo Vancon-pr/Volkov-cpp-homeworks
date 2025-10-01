@@ -7,10 +7,11 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	float a;
-	cout << "Введите число: ";
-			cin >> a;
+	
 	try
 	{
+		cout << "Введите  сумму в рублях: ";
+		cin >> a;
 		if (a) 
 		{
 			
