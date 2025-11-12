@@ -10,6 +10,11 @@ int main()
     string num;
     getline(cin, num);
     num += ' ';
+    if (num.length() - 1 > 15)
+    {
+        cout << "Число слишком длинное\n";
+        return 1;
+    }
     char n;
     char a;
     int t = 0;
