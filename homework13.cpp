@@ -84,5 +84,6 @@ int main()
         fl = 0;
     }
     cout << "true" << '\n';
+    return 0;
 }
 
