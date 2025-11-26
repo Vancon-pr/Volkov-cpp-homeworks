@@ -22,7 +22,13 @@ int main()
     int c1; int c2;
     getline(cin, str);
     int len = len_(str);
+    if (len > 10000)
+    {
+        cout << "Длина строки слишком большая\n";
+        return 0;
+    }
     int* mass = new int[len];
+    
     for (int i = 0; i < len; i++)
     {
         switch (str[i])
@@ -45,6 +51,9 @@ int main()
         case ']':
             mass[i] = -3;
             break;
+        default:
+            cout << "Недопустимый символ\n";
+            return 0;
         }
     }
     int fl = 1;
