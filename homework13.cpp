@@ -3,90 +3,210 @@
 
 using namespace std;
 
-int len_(string s)
+class TuringMachine
 {
-    int i = 0;
-    while (s[i] != '\0')
+private:
+    string tape;
+    int state;
+public:
+    TuringMachine(int s, string t) :state(s), tape(' ' + t) {};
+    TuringMachine()
     {
-        i++;
+        state = 0;
+        tape = "";
     }
-    return i;
-}
-
-int main()
-{
-    setlocale(LC_ALL, "Rus");
-    string str;
-    char pr1;
-    char pr2;
-    int c1; int c2;
-    getline(cin, str);
-    int len = len_(str);
-    if (len > 10000)
+    void set_state(int s)
     {
-        cout << "Длина строки слишком большая\n";
-        return 0;
+        state = s;
     }
-    int* mass = new int[len];
-    
-    for (int i = 0; i < len; i++)
+    void set_tape(string tape)
     {
-        switch (str[i])
+        this->tape = tape;
+    }
+    string get_tape()
+    {
+        return tape;
+    }
+    int get_state()
+    {
+        return state;
+    }
+    string work()
+    {
+        int l = tape.length();
+        int i = 0;
+        while (tape[i] != '\0')
         {
-        case '(':
-            mass[i] = 1;
-            break;
-        case '{':
-            mass[i] = 2;
-            break;
-        case '[':
-            mass[i] = 3;
-            break;
-        case ')':
-            mass[i] = -1;
-            break;
-        case '}':
-            mass[i] = -2;
-            break;
-        case ']':
-            mass[i] = -3;
-            break;
-        default:
-            cout << "Недопустимый символ\n";
-            return 0;
-        }
-    }
-    int fl = 1;
-    int sum;
-    while (fl != 0)
-    {
-        sum = 0;
-        for (int i = 0; i < len; i++)
-        {
-            fl += abs(mass[i]);
-            if (mass[i]>0)
+            switch (state)
             {
-                sum = mass[i];
-                mass[i] = 0;
-            }
-            if (mass[i] < 0)
-            {
-                
-                sum += mass[i];
-                mass[i] = 0;
-
-                if (sum != 0)
+            case 0:
+                switch (tape[i])
                 {
-                    cout << "false" << '\n';
-                    return 0;
+                case '(':
+                    i += 1;
+                    break;
+                case '{':
+                    i += 1;
+                    state = 1;
+                    break;
+                case '[':
+                    i += 1;
+                    state = 2;
+                    break;
+                case ')':
+                    tape[i] = '0';
+                    i--;
+                    state = 3;
+                    break;
+                case '0':
+                    i ++;
+                    break;
+                case ' ':
+                    i++;
+                    break;
+                default:
+                    return tape;
+                }
+                break;
+            case 1:
+                switch (tape[i])
+                {
+                case '(':
+                    i += 1;
+                    state = 0;
+                    break;
+                case '{':
+                    i += 1;
+                    state = 1;
+                    break;
+                case '[':
+                    i += 1;
+                    state = 2;
+                    break;
+                case '}':
+                    tape[i] = '0';
+                    i--;
+                    state = 4;
+                    break;
+                case '0':
+                    i += 1;
+                    break;
+                case ' ':
+                    i++;
+                    break;
+                default:
+                    return tape;
+                }
+                break;
+            case 2:
+                switch (tape[i])
+                {
+                case '(':
+                    i += 1;
+                    state = 0;
+                    break;
+                case '{':
+                    i += 1;
+                    state = 1;
+                    break;
+                case '[':
+                    i += 1;
+                    state = 2;
+                    break;
+                case ']':
+                    tape[i] = '0';
+                    i--;
+                    state = 5;
+                    break;
+                case '0':
+                    i += 1;
+                    break;
+                case ' ':
+                    i++;
+                    break;
+                default:
+                    return tape;
+                }
+                break;
+            case 3:
+                switch (tape[i])
+                {
+                case '(':
+                    tape[i] = '0';
+                    i --;
+                    state = 0;
+                    break;
+                case '0':
+                    i--;
+                    break;
+                case ' ':
+                    state = 0;
+                    i++;
+                    break;
+                default:
+                    return tape;
+                }
+                break;
+            case 4:
+                switch (tape[i])
+                {
+                case '{':
+                    tape[i] = '0';
+                    i--;
+                    state = 0;
+                    break;
+                case '0':
+                    i--;
+                    break;
+                case ' ':
+                    state = 0;
+                    i++;
+                    break;
+                default:
+                    return tape;
+                }
+                break;
+            case 5:
+                switch (tape[i])
+                {
+                case '[':
+                    tape[i] = '0';
+                    i--;
+                    state = 0;
+                    break;
+                case '0':
+                    i--;
+                    break;
+                case ' ':
+                    state = 0;
+                    i++;
+                    break;
+                default:
+                    return tape;
                 }
                 break;
             }
-            
         }
-        fl = 0;
+        return tape;
+    }
+};
+
+int main()
+{
+    string str;
+    getline(cin, str);
+    TuringMachine TM(0,str);
+    str = TM.work();
+    int i = 1;
+    while (str[i] != 0)
+    {
+        i++;
+        if (str[i] != '0' and str[i] != '\0')
+        {
+            cout << "false" << '\n';
+            return 0;
+        }
     }
     cout << "true" << '\n';
     return 0;
 }
-
