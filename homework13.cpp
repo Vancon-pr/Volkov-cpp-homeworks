@@ -47,11 +47,6 @@ int main()
             break;
         }
     }
-    for (int i = 0; i < len; i++)
-    {
-        cout << mass[i] << ' ';
-    }
-    cout << '\n';
     int fl = 1;
     int sum;
     while (fl != 0)
@@ -63,7 +58,6 @@ int main()
             if (mass[i]>0)
             {
                 sum = mass[i];
-                cout << sum << ' '<<mass[i] << '\n';
                 mass[i] = 0;
             }
             if (mass[i] < 0)
@@ -71,7 +65,7 @@ int main()
                 
                 sum += mass[i];
                 mass[i] = 0;
-                cout << sum << '\n';
+
                 if (sum != 0)
                 {
                     cout << "false" << '\n';
