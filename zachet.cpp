@@ -46,19 +46,15 @@ int main()
             i++;
         }
     }
+    int f = -1;
     for (int i = 0; i < l; i++)
     {
         if (mass[i] == x)
         {
-            cout << "Индекс искомого элемента " << i << '\n';
-            fl = false;
+            f = i;
             break;
         }
     }
-    if (fl)
-    {
-        cout << "-1\n";
-        return -1;
-    }
+    cout << "Индекс искомого элемента " << f << '\n';
     return 0;
 }
